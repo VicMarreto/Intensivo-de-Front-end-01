@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Exercícios de Formulários</h1>
+
+    <section>
+        <h2>1. Formulário de Cadastro</h2>
+
+        <form>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" required>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+    </section>
+
+
+    <section>
+        <h2>2. Validação de E-mail e Senha</h2>
+
+        <form>
+            <label for="email-validacao">E-mail:</label>
+            <input
+                type="email"
+                id="email-validacao"
+                name="email"
+                placeholder="exemplo@email.com"
+                required
+            >
+
+            <label for="senha-validacao">Senha:</label>
+            <input
+                type="password"
+                id="senha-validacao"
+                name="senha"
+                pattern=".{8,}"
+                title="A senha deve possuir pelo menos 8 caracteres."
+                required
+            >
+
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+
+    <section>
+        <h2>3. Formulário de Login Responsivo</h2>
+
+        <form class="login">
+            <label for="login-email">E-mail:</label>
+            <input
+                type="email"
+                id="login-email"
+                name="email"
+                required
+            >
+
+            <label for="login-senha">Senha:</label>
+            <input
+                type="password"
+                id="login-senha"
+                name="senha"
+                required
+            >
+
+            <button type="submit">Entrar</button>
+        </form>
+    </section>
+
+
+    <section>
+        <h2>4. Informações Pessoais e Endereço</h2>
+
+        <form>
+
+            <fieldset>
+                <legend>Informações Pessoais</legend>
+
+                <label for="nome-pessoal">Nome:</label>
+                <input
+                    type="text"
+                    id="nome-pessoal"
+                    name="nome"
+                    required
+                >
+
+                <label for="email-pessoal">E-mail:</label>
+                <input
+                    type="email"
+                    id="email-pessoal"
+                    name="email"
+                    required
+                >
+
+                <label for="telefone">Telefone:</label>
+                <input
+                    type="tel"
+                    id="telefone"
+                    name="telefone"
+                >
+            </fieldset>
+
+
+            <fieldset>
+                <legend>Endereço</legend>
+
+                <label for="rua">Rua:</label>
+                <input
+                    type="text"
+                    id="rua"
+                    name="rua"
+                    required
+                >
+
+                <label for="numero">Número:</label>
+                <input
+                    type="number"
+                    id="numero"
+                    name="numero"
+                    required
+                >
+
+                <label for="cidade">Cidade:</label>
+                <input
+                    type="text"
+                    id="cidade"
+                    name="cidade"
+                    required
+                >
+
+                <label for="cep">CEP:</label>
+                <input
+                    type="text"
+                    id="cep"
+                    name="cep"
+                    required
+                >
+            </fieldset>
+
+            <button type="submit">Cadastrar</button>
+
+        </form>
+    </section>
+
+
+    <section>
+        <h2>5. Formulário de Pesquisa</h2>
+
+        <form>
+            <label for="nome-pesquisa">Nome:</label>
+            <input
+                type="text"
+                id="nome-pesquisa"
+                name="nome"
+                required
+            >
+
+            <label for="opiniao">
+                O que você achou do nosso site?
+            </label>
+
+            <textarea
+                id="opiniao"
+                name="opiniao"
+                rows="5"
+                required
+            ></textarea>
+
+            <button type="submit">Enviar Pesquisa</button>
+        </form>
+    </section>
+
+</body>
+
+</html>
