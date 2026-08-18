@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Meta viewport para adaptar a página a celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Portfólio</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <nav class="menu">
+
+            <a href="#" class="logo">Meu Portfólio</a>
+
+            <!-- Checkbox usado para abrir o menu hamburguer -->
+            <input type="checkbox" id="menu-toggle">
+
+            <label for="menu-toggle" class="menu-icon">
+                ☰
+            </label>
+
+            <ul class="menu-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="inicio" class="inicio">
+            <h1>Desenvolvedor Júnior</h1>
+
+            <p>
+                Bem-vindo ao meu portfólio de desenvolvimento web.
+                Aqui estão alguns dos exercícios e projetos que desenvolvi
+                durante meus estudos.
+            </p>
+
+            <a href="#projetos" class="botao">Ver projetos</a>
+        </section>
+
+
+        <section id="sobre" class="sobre">
+            <h2>Sobre o projeto</h2>
+
+            <p>
+                Este projeto foi desenvolvido para praticar conceitos de
+                responsividade, utilizando HTML e CSS. A página se adapta
+                a computadores, tablets e celulares.
+            </p>
+        </section>
+
+
+        <section id="projetos" class="projetos">
+
+            <h2>Projetos</h2>
+
+            <div class="cards">
+
+                <article class="card">
+                    <h3>HTML</h3>
+                    <p>
+                        Exercícios utilizando estrutura semântica,
+                        links, imagens e formulários.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>CSS</h3>
+                    <p>
+                        Exercícios de estilização, posicionamento,
+                        cores e layouts.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Responsividade</h3>
+                    <p>
+                        Desenvolvimento de páginas adaptáveis
+                        para diferentes tamanhos de tela.
+                    </p>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- CARROSSEL -->
+        <section class="galeria">
+
+            <h2>Carrossel de imagens</h2>
+
+            <div class="carrossel">
+
+                <div class="slides">
+
+                    <div class="slide">
+                        <img src="servicos-gerenciados.jpg"Imagem 1">
+                    </div>
+
+                    <div class="slide">
+                        <img src="original-c757515bf1cfe38d432c114ef97ff2a5-scaled.jpeg" alt="Imagem 2">
+                    </div>
+
+                    <div class="slide">
+                        <img src="1694561592370.jpg" alt="Imagem 3">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section id="contato" class="contato">
+
+            <h2>Contato</h2>
+
+            <p>
+                Confira meus projetos e exercícios no GitHub.
+            </p>
+
+            <a
+                href="https://github.com/"
+                target="_blank"
+                class="botao"
+            >
+                Meu GitHub
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>© 2026 - Meu Portfólio</p>
+    </footer>
+
+</body>
+</html>
