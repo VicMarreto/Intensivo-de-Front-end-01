@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interfaces Web Interativas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Interfaces Web Interativas</h1>
+
+
+    <!-- Exercício 1 -->
+    <section>
+        <h2>1. Botão Interativo</h2>
+
+        <p>Passe o mouse sobre o botão:</p>
+
+        <button id="botaoCor">Passar o mouse</button>
+    </section>
+
+
+    <!-- Exercício 2 -->
+    <section>
+        <h2>2. Contador de Cliques</h2>
+
+        <p>Cliques: <span id="contador">0</span></p>
+
+        <button id="botaoContador">Clique aqui</button>
+    </section>
+
+
+    <!-- Exercício 3 -->
+    <section>
+        <h2>3. Modal de Aviso</h2>
+
+        <button id="abrirModal">Abrir aviso</button>
+
+        <div id="modal" class="modal">
+
+            <div class="modal-conteudo">
+
+                <h3>Atenção!</h3>
+
+                <p>
+                    Este é um aviso criado utilizando JavaScript.
+                </p>
+
+                <button id="fecharModal">Fechar</button>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Exercício 4 -->
+    <section>
+        <h2>4. Galeria de Imagens</h2>
+
+        <div class="galeria">
+
+            <img
+                src="images.jpg"
+                alt="Imagem de paisagem"
+            >
+
+            <img
+                src="Gato-filhote-7.jpg"
+                alt="Imagem de gatinho"
+            >
+
+            <img
+                src="canva-MAGzG5kx6jY.jpg"
+                alt="Imagem de cachorro"
+            >
+
+        </div>
+
+        <div id="imagemAmpliada" class="imagem-ampliada">
+
+            <span id="fecharImagem">&times;</span>
+
+            <img id="imagemModal" src="" alt="Imagem ampliada">
+
+        </div>
+    </section>
+
+
+    <!-- Exercício 5 -->
+    <section>
+        <h2>5. Sistema de Tabs</h2>
+
+        <div class="tabs">
+
+            <button class="tab" onclick="mostrarAba('aba1')">
+                HTML
+            </button>
+
+            <button class="tab" onclick="mostrarAba('aba2')">
+                CSS
+            </button>
+
+            <button class="tab" onclick="mostrarAba('aba3')">
+                JavaScript
+            </button>
+
+        </div>
+
+        <div id="aba1" class="conteudo-aba">
+            <h3>HTML</h3>
+            <p>
+                HTML é utilizado para criar a estrutura
+                das páginas web.
+            </p>
+        </div>
+
+        <div id="aba2" class="conteudo-aba">
+            <h3>CSS</h3>
+            <p>
+                CSS é utilizado para estilizar e organizar
+                a aparência das páginas.
+            </p>
+        </div>
+
+        <div id="aba3" class="conteudo-aba">
+            <h3>JavaScript</h3>
+            <p>
+                JavaScript permite adicionar interatividade
+                às páginas web.
+            </p>
+        </div>
+
+    </section>
+
+
+    <script>
+
+        // Exercício 1 - Mudar a cor do botão
+
+        const botaoCor = document.getElementById("botaoCor");
+
+        botaoCor.addEventListener("mouseover", function() {
+            botaoCor.style.backgroundColor = "#7e22ce";
+        });
+
+        botaoCor.addEventListener("mouseout", function() {
+            botaoCor.style.backgroundColor = "#9333ea";
+        });
+
+
+        // Exercício 2 - Contador de cliques
+
+        let quantidadeCliques = 0;
+
+        const contador = document.getElementById("contador");
+        const botaoContador = document.getElementById("botaoContador");
+
+        botaoContador.addEventListener("click", function() {
+
+            quantidadeCliques++;
+
+            contador.textContent = quantidadeCliques;
+
+        });
+
+
+        // Exercício 3 - Modal
+
+        const modal = document.getElementById("modal");
+        const abrirModal = document.getElementById("abrirModal");
+        const fecharModal = document.getElementById("fecharModal");
+
+        abrirModal.addEventListener("click", function() {
+            modal.style.display = "flex";
+        });
+
+        fecharModal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+
+        modal.addEventListener("click", function(event) {
+
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+
+        });
+
+
+        // Exercício 4 - Galeria de imagens
+
+        const imagens = document.querySelectorAll(".galeria img");
+        const imagemAmpliada = document.getElementById("imagemAmpliada");
+        const imagemModal = document.getElementById("imagemModal");
+        const fecharImagem = document.getElementById("fecharImagem");
+
+        imagens.forEach(function(imagem) {
+
+            imagem.addEventListener("click", function() {
+
+                imagemModal.src = imagem.src;
+                imagemAmpliada.style.display = "flex";
+
+            });
+
+        });
+
+        fecharImagem.addEventListener("click", function() {
+            imagemAmpliada.style.display = "none";
+        });
+
+        imagemAmpliada.addEventListener("click", function(event) {
+
+            if (event.target === imagemAmpliada) {
+                imagemAmpliada.style.display = "none";
+            }
+
+        });
+
+
+        // Exercício 5 - Sistema de Tabs
+
+        function mostrarAba(nomeAba) {
+
+            const abas = document.querySelectorAll(".conteudo-aba");
+
+            abas.forEach(function(aba) {
+                aba.style.display = "none";
+            });
+
+            document.getElementById(nomeAba).style.display = "block";
+        }
+
+        mostrarAba("aba1");
+
+    </script>
+
+</body>
+
+</html>
