@@ -1,0 +1,281 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 30px 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f3e8ff;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #581c87;
+    margin-bottom: 40px;
+}
+
+section {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 30px;
+    padding: 25px;
+    background-color: white;
+    border-radius: 10px;
+
+    /* Exercício 3 */
+    box-shadow: 0 4px 10px rgba(88, 28, 135, 0.15);
+}
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #7e22ce;
+    border-bottom: 2px solid #d8b4fe;
+    padding-bottom: 10px;
+}
+
+
+/* ========================= */
+/* 1. CSS GRID */
+/* ========================= */
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.item {
+    padding: 30px;
+    text-align: center;
+    background-color: #e9d5ff;
+    color: #581c87;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+
+/* ========================= */
+/* 2. ANIMAÇÃO */
+/* ========================= */
+
+.botao-animado {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    background-color: #9333ea;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+
+    animation: pulsar 2s infinite;
+}
+
+@keyframes pulsar {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* ========================= */
+/* 3. BOX-SHADOW */
+/* ========================= */
+
+.caixa-sombra {
+    padding: 25px;
+    background-color: #faf5ff;
+    border-radius: 8px;
+
+    box-shadow: 5px 5px 12px rgba(88, 28, 135, 0.25);
+}
+
+.caixa-sombra h3 {
+    margin-top: 0;
+    color: #7e22ce;
+}
+
+
+/* ========================= */
+/* 4. CLIP-PATH */
+/* ========================= */
+
+.botoes-clip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.botoes-clip button {
+    border: none;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: #8b2fc9;
+}
+
+
+/* Triângulo */
+
+.botao-triangulo {
+    width: 120px;
+    height: 100px;
+
+    clip-path: polygon(
+        50% 0%,
+        0% 100%,
+        100% 100%
+    );
+}
+
+
+/* Hexágono */
+
+.botao-hexagono {
+    width: 140px;
+    height: 80px;
+
+    clip-path: polygon(
+        25% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        25% 100%,
+        0% 50%
+    );
+}
+
+
+/* Seta */
+
+.botao-seta {
+    width: 140px;
+    height: 70px;
+
+    clip-path: polygon(
+        0% 0%,
+        75% 0%,
+        100% 50%,
+        75% 100%,
+        0% 100%,
+        20% 50%
+    );
+}
+
+
+/* ========================= */
+/* 5. FORMULÁRIO */
+/* ========================= */
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+    color: #555;
+    margin-top: 5px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 11px;
+    font-size: 16px;
+
+    border: 1px solid #c084fc;
+    border-radius: 5px;
+
+    outline: none;
+}
+
+
+/* Focus */
+
+input:focus,
+textarea:focus {
+    border-color: #9333ea;
+
+    box-shadow: 0 0 5px rgba(147, 51, 234, 0.3);
+}
+
+
+/* Placeholder personalizado */
+
+input::placeholder,
+textarea::placeholder {
+    color: #a855f7;
+    font-style: italic;
+}
+
+
+/* Botão do formulário */
+
+form button {
+    margin-top: 10px;
+    padding: 12px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #9333ea;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #6b21a8;
+}
+
+
+/* ========================= */
+/* RESPONSIVIDADE */
+/* ========================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 15px 10px;
+    }
+
+    section {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+
+    .botoes-clip {
+        flex-direction: column;
+    }
+
+}
