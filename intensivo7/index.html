@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intensivo 7 - APIs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Meu Portfólio</h1>
+            <p>Tema 7 — Desenvolver interfaces web consumindo API</p>
+            <nav>
+                <a href="#ex1">Exercício 1</a>
+                <a href="#ex2">Exercício 2</a>
+                <a href="#ex3">Exercício 3</a>
+                <a href="#ex4">Exercício 4</a>
+                <a href="#ex5">Exercício 5</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>Exercícios de APIs</h2>
+            <p>Atividades práticas utilizando JavaScript, Fetch API, APIs públicas e geolocalização.</p>
+        </section>
+
+        <section class="card" id="ex1">
+            <span class="numero">01</span>
+            <h2>Buscar dados de uma API pública</h2>
+            <p>Busca uma publicação da API JSONPlaceholder usando <strong>fetch()</strong>.</p>
+            <button id="btnPost">Buscar publicação</button>
+            <div id="postResultado" class="resultado">Clique no botão para carregar os dados.</div>
+        </section>
+
+        <section class="card" id="ex2">
+            <span class="numero">02</span>
+            <h2>Campo de busca e filtro</h2>
+            <p>Digite um nome para filtrar usuários consumidos da API.</p>
+            <div class="linha">
+                <input type="text" id="busca" placeholder="Digite um nome...">
+                <button id="btnBusca">Pesquisar</button>
+            </div>
+            <div id="buscaResultado" class="resultado">Os resultados aparecerão aqui.</div>
+        </section>
+
+        <section class="card" id="ex3">
+            <span class="numero">03</span>
+            <h2>Sistema de login</h2>
+            <p>Validação feita por uma API fictícia criada no próprio JavaScript.</p>
+            <form id="loginForm">
+                <input type="text" id="usuario" placeholder="Usuário" required>
+                <input type="password" id="senha" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div id="loginResultado" class="resultado">Use <strong>aluno</strong> e <strong>1234</strong> para testar.</div>
+        </section>
+
+        <section class="card" id="ex4">
+            <span class="numero">04</span>
+            <h2>Lista de usuários</h2>
+            <p>Lista de usuários consumida de uma API JSON pública.</p>
+            <button id="btnUsuarios">Carregar usuários</button>
+            <div id="usuariosResultado" class="grid-usuarios"></div>
+        </section>
+
+        <section class="card" id="ex5">
+            <span class="numero">05</span>
+            <h2>Previsão do tempo pela localização</h2>
+            <p>Permita o acesso à localização para consultar a previsão usando a API Open-Meteo.</p>
+            <button id="btnClima">Ver minha previsão</button>
+            <div id="climaResultado" class="resultado">A localização será solicitada ao clicar no botão.</div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Intensivo 7 • Interfaces Web consumindo API</p>
+    </footer>
+
+    <script>
+        const postResultado = document.getElementById("postResultado");
+
+        document.getElementById("btnPost").addEventListener("click", async () => {
+            postResultado.innerHTML = "Carregando...";
+            try {
+                const resposta = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+                if (!resposta.ok) throw new Error("Erro ao consultar a API.");
+                const post = await resposta.json();
+
+                postResultado.innerHTML = `
+                    <div class="item">
+                        <strong>ID:</strong> ${post.id}<br>
+                        <strong>Título:</strong> ${post.title}<br>
+                        <strong>Conteúdo:</strong> ${post.body}
+                    </div>`;
+            } catch (erro) {
+                postResultado.innerHTML = `<p class="erro">Não foi possível carregar os dados.</p>`;
+            }
+        });
+
+        let usuariosBusca = [];
+
+        async function carregarUsuariosBusca() {
+            const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+            usuariosBusca = await resposta.json();
+        }
+
+        carregarUsuariosBusca();
+
+        function mostrarBusca() {
+            const termo = document.getElementById("busca").value.toLowerCase().trim();
+            const resultado = document.getElementById("buscaResultado");
+
+            if (!termo) {
+                resultado.innerHTML = "<p>Digite um nome para pesquisar.</p>";
+                return;
+            }
+
+            const encontrados = usuariosBusca.filter(usuario =>
+                usuario.name.toLowerCase().includes(termo) ||
+                usuario.username.toLowerCase().includes(termo)
+            );
+
+            if (encontrados.length === 0) {
+                resultado.innerHTML = "<p>Nenhum usuário encontrado.</p>";
+                return;
+            }
+
+            resultado.innerHTML = encontrados.map(usuario => `
+                <div class="item">
+                    <strong>${usuario.name}</strong><br>
+                    Usuário: @${usuario.username}<br>
+                    E-mail: ${usuario.email}
+                </div>
+            `).join("");
+        }
+
+        document.getElementById("btnBusca").addEventListener("click", mostrarBusca);
+        document.getElementById("busca").addEventListener("keyup", (e) => {
+            if (e.key === "Enter") mostrarBusca();
+        });
+
+        const API_FICTICIA = {
+            async validar(usuario, senha) {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                return usuario === "aluno" && senha === "1234";
+            }
+        };
+
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const usuario = document.getElementById("usuario").value;
+            const senha = document.getElementById("senha").value;
+            const resultado = document.getElementById("loginResultado");
+
+            resultado.innerHTML = "Validando...";
+            const valido = await API_FICTICIA.validar(usuario, senha);
+
+            if (valido) {
+                resultado.innerHTML = `<p class="sucesso">Login realizado com sucesso! Bem-vindo, ${usuario}.</p>`;
+            } else {
+                resultado.innerHTML = `<p class="erro">Usuário ou senha incorretos.</p>`;
+            }
+        });
+
+        document.getElementById("btnUsuarios").addEventListener("click", async () => {
+            const area = document.getElementById("usuariosResultado");
+            area.innerHTML = "<p>Carregando usuários...</p>";
+
+            try {
+                const resposta = await fetch("https://jsonplaceholder.typicode.com/users");
+                if (!resposta.ok) throw new Error();
+                const usuarios = await resposta.json();
+
+                area.innerHTML = usuarios.map(usuario => `
+                    <div class="usuario">
+                        <h3>${usuario.name}</h3>
+                        <p><strong>Usuário:</strong> @${usuario.username}</p>
+                        <p><strong>E-mail:</strong> ${usuario.email}</p>
+                        <p><strong>Cidade:</strong> ${usuario.address.city}</p>
+                    </div>
+                `).join("");
+            } catch {
+                area.innerHTML = `<p class="erro">Erro ao carregar a lista.</p>`;
+            }
+        });
+
+        document.getElementById("btnClima").addEventListener("click", () => {
+            const area = document.getElementById("climaResultado");
+            area.innerHTML = "Obtendo sua localização...";
+
+            if (!navigator.geolocation) {
+                area.innerHTML = `<p class="erro">Seu navegador não oferece suporte à geolocalização.</p>`;
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(async (posicao) => {
+                const latitude = posicao.coords.latitude;
+                const longitude = posicao.coords.longitude;
+
+                area.innerHTML = "Consultando a previsão do tempo...";
+
+                try {
+                    const url = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto&forecast_days=3`;
+                    const resposta = await fetch(url);
+                    if (!resposta.ok) throw new Error();
+
+                    const clima = await resposta.json();
+
+                    const dias = clima.daily.time.map((data, i) => `
+                        <div class="previsao">
+                            <strong>${new Date(data + "T12:00:00").toLocaleDateString("pt-BR")}</strong>
+                            <span>Máx.: ${clima.daily.temperature_2m_max[i]}°C</span>
+                            <span>Mín.: ${clima.daily.temperature_2m_min[i]}°C</span>
+                        </div>
+                    `).join("");
+
+                    area.innerHTML = `
+                        <div class="clima-atual">
+                            <h3>Clima atual</h3>
+                            <p>Temperatura: <strong>${clima.current.temperature_2m}°C</strong></p>
+                            <p>Umidade: <strong>${clima.current.relative_humidity_2m}%</strong></p>
+                            <p>Vento: <strong>${clima.current.wind_speed_10m} km/h</strong></p>
+                        </div>
+                        <h3>Próximos 3 dias</h3>
+                        <div class="previsoes">${dias}</div>
+                    `;
+                } catch {
+                    area.innerHTML = `<p class="erro">Não foi possível consultar a previsão.</p>`;
+                }
+            }, () => {
+                area.innerHTML = `<p class="erro">Permissão de localização negada. Permita a localização e tente novamente.</p>`;
+            });
+        });
+    </script>
+</body>
+</html>
